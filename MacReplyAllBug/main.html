@@ -29,8 +29,8 @@
 				setTimeout(function() {
 					Office.context.mailbox.item.displayReplyAllForm(
 					{
-					  'htmlBody' : '<div>hi</div>',
-					  'attachments' :
+					  htmlBody : '<div>hi</div>',
+					  attachments :
 					  [
 						{
 						  'type' : Office.MailboxEnums.AttachmentType.File,
@@ -38,13 +38,10 @@
 						  'url' : 'http://i.imgur.com/sRgTlGR.jpg'
 						}
 					  ],
-					  'callback' : function (asyncResult)
+					  callback : function (asyncResult)
 					  {
-						if (asyncResult && asyncResult.status === Office.AsyncResultStatus.Succeeded) {
-							document.querySelector("body").innerHTML = "Success";
-						} else {
-							document.querySelector("body").innerHTML = "Callback error";
-						}
+						  document.querySelector("body").innerHTML = "Callback executed. <br>" +
+											"Async result value: " + (asyncResult && asyncResult.value ? JSON.stringify(asyncResult.value) : 'undefined');
 					  }
 					});
 				}, 1000);
