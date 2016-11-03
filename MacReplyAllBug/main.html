@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Add-In Bug</title>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		Office.initialize = function (reason) {
+			$(document).ready(function () {
+				setTimeout(function() {
+					Office.context.mailbox.item.displayReplyAllForm(
+					{
+					  'htmlBody' : '<div>hi</div>',
+					  'attachments' :
+					  [
+						{
+						  'type' : Office.MailboxEnums.AttachmentType.File,
+						  'name' : 'squirrel.png',
+						  'url' : 'http://i.imgur.com/sRgTlGR.jpg'
+						}
+					  ],
+					  'callback' : function(asyncResult)
+					  {
+						console.log(asyncResult.value);
+					  }
+					});
+				}, 1000);
+			});
+		};
+	</script>
+</head>
+<body>	
+</body>
+</html>
